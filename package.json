@@ -1,6 +1,6 @@
 {
   "name": "taro-ray",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "license": "MIT",
   "description": "taro-ray是一款Taro.request封装过的请求库可在多平台使用weapp & h5",
