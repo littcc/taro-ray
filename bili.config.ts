@@ -9,7 +9,7 @@ const config: Config = {
         sourceMap: true
     },
     bundleNodeModules: true,
-    externals: [/@tarojs/],
+    externals: [/@tarojs/, 'lodash', 'path-to-regexp'],
     plugins: {
         babel: false
     }
