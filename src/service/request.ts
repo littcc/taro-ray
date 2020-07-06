@@ -2,7 +2,7 @@ import * as Taro from '@tarojs/taro';
 import defaultsDeep from 'lodash/defaultsDeep';
 import defaults from 'lodash/defaults';
 
-import { Request, MessageConfig, InitOption } from './interface.d';
+import { Request, MessageConfig, Ray } from '../../@types';
 import { init, httpCodeHandle } from './interceptors';
 
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
@@ -56,12 +56,12 @@ METHODS.forEach((key: string) => {
   };
 });
 
-export const TaroRay = {
+export const TaroRay: Ray = {
   baseUrl: '',
   interceptors: [],
   httpCodeBehavior: {},
   header: {},
-  init({ baseUrl = '', interceptors = [], httpCodeBehavior = {}, header = {} }: InitOption): Request {
+  init({ baseUrl = '', interceptors = [], httpCodeBehavior = {}, header = {} }) {
     this.baseUrl = baseUrl;
     this.interceptors = interceptors;
     this.httpCodeBehavior = httpCodeBehavior;

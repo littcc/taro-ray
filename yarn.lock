@@ -10440,6 +10440,20 @@ taro-ray@^0.1.2:
     react "^16.10.0"
     react-dom "^16.10.0"
 
+taro-ray@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmjs.org/taro-ray/-/taro-ray-0.4.0.tgz#b4552100a4385b5176f905c51ca04e98c6687c8a"
+  integrity sha512-Hvyabkv9KFAOU7eXo/L5vM6SGtVY9FBjm+FamQTS2Of4UsSEMME8qG4Fqa/rsFLehOPLdaQUrCJirycOly1wYg==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    "@tarojs/components" "3.0.2"
+    "@tarojs/react" "3.0.2"
+    "@tarojs/runtime" "3.0.2"
+    "@tarojs/taro" "3.0.2"
+    react "^16.10.0"
+    react-dom "^16.10.0"
+    taro-ray "^0.1.2"
+
 terser-webpack-plugin@^1.4.3:
   version "1.4.4"
   resolved "https://registry.npm.taobao.org/terser-webpack-plugin/download/terser-webpack-plugin-1.4.4.tgz?cache=0&sync_timestamp=1592492230913&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fterser-webpack-plugin%2Fdownload%2Fterser-webpack-plugin-1.4.4.tgz#2c63544347324baafa9a56baaddf1634c8abfc2f"
