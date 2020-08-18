@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Taro, { Chain } from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
-import { TaroRay } from 'taro-ray';
+// import { TaroRay } from 'taro-ray';
 
 // TODO 测试
 // import { TaroRay } from '../../../lib';
-// import { TaroRay } from '../../service';
+import TaroRay from '../../service';
 
 const codeErrorBehavior = {
   default: {
@@ -22,6 +22,15 @@ const codeErrorBehavior = {
           console.log(res);
         },
       });
+    },
+  },
+};
+
+const httpCodeBehavior = {
+  404: {
+    message: '测试404',
+    behavior: detail => {
+      console.log(detail, detail);
     },
   },
 };
@@ -65,6 +74,10 @@ const getUrlOfTaroEnv = () => {
 
 const request = TaroRay.init({
   baseUrl: getUrlOfTaroEnv(),
+  header: {
+    'content-type': 'application/json',
+  },
+  httpCodeBehavior,
   interceptors: [
     responseCodeErrorHandle,
     errorHandle,
@@ -89,10 +102,29 @@ export default class Index extends Component {
         console.log('页面返回数据', response);
       });
   };
+
+  onRequest1 = () => {
+    request
+      .post({
+        url: '/api/grocery/c/v1/user/status',
+        data: {
+          id: 111,
+          name: 222,
+          age: 333,
+        },
+        header: {
+          a: '1111',
+        },
+      })
+      .then(response => {
+        console.log('页面返回数据', response);
+      });
+  };
   render() {
     return (
       <View className='index'>
         <Button onClick={this.onRequest}>请求</Button>
+        <Button onClick={this.onRequest1}>POST请求</Button>
       </View>
     );
   }

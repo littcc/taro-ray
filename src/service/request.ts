@@ -1,4 +1,4 @@
-import * as Taro from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import defaultsDeep from 'lodash/defaultsDeep';
 import defaults from 'lodash/defaults';
 
@@ -27,14 +27,14 @@ const DEFAULT_MESSAGE_CONFIG = {
 const request: Request = {
   request: async (params: Taro.RequestParams, messageConfig: MessageConfig): Promise<any> => {
     const { loading: loadingConfig, error: errorConfig } = defaultsDeep({}, messageConfig, DEFAULT_MESSAGE_CONFIG);
-
     loadingConfig.showToast && Taro.showToast(loadingConfig);
     const res = await Taro.request(params)
       .then(response => {
         loadingConfig.showToast && Taro.hideToast();
         return response;
       })
-      .catch(error => {
+      .catch(e => {
+        const { error } = e;
         setTimeout(() => {
           errorConfig.showToast && Taro.showToast(defaults({ title: error.message }, errorConfig));
           if (errorConfig.redirectToErrorPage) {
@@ -42,7 +42,7 @@ const request: Request = {
           }
         }, 100);
         loadingConfig.showToast && Taro.hideToast();
-        return Promise.reject(error);
+        return Promise.reject(e);
       });
     return res;
   },

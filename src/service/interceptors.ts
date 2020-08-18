@@ -66,7 +66,7 @@ const init = async (chain: Chain) => {
     }
   );
 
-  return chain.proceed(options)
+  return chain.proceed(options);
 };
 
 // 处理默认的 http 错误
@@ -99,8 +99,22 @@ const httpCodeHandle = (chain: Chain) => {
       });
     })
     .catch(error => {
+      const { status } = error;
+
+      if (status !== STATUS_CODE.ok) {
+        // 如果传入了自定义的默认错误消息, 将会走默认的错误消息提示
+        const detail = defaultsDeep({}, TaroRay.httpCodeBehavior[status]);
+        const { behavior } = detail;
+        behavior && behavior(detail);
+        return Promise.reject({
+          isRequestError: true,
+          error: detail,
+          chain,
+        });
+      }
       return Promise.reject({
         isRequestError: true,
+        chain,
         error,
       });
     });
