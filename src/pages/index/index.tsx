@@ -106,7 +106,7 @@ export default class Index extends Component {
   onRequest1 = () => {
     request
       .post({
-        url: '/api/grocery/c/v1/user/status',
+        url: '/api/grocery',
         data: {
           id: 111,
           name: 222,
