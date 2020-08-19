@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro';
+import * as Taro from '@tarojs/taro';
 import defaultsDeep from 'lodash/defaultsDeep';
 import defaults from 'lodash/defaults';
 

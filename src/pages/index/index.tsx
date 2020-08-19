@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Taro, { Chain } from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
-// import { TaroRay } from 'taro-ray';
+import { TaroRay } from 'taro-ray';
 
 // TODO 测试
 // import { TaroRay } from '../../../lib';
-import TaroRay from '../../service';
+// import TaroRay from '../../service';
 
 const codeErrorBehavior = {
   default: {

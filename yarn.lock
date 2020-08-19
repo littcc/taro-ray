@@ -1553,6 +1553,13 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-14.0.14.tgz?cache=0&sync_timestamp=1592987702680&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-14.0.14.tgz#24a0b5959f16ac141aeb0c5b3cd7a15b7c64cbce"
   integrity sha1-JKC1lZ8WrBQa6wxbPNehW3xky84=
 
+"@types/path-to-regexp@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.npmjs.org/@types/path-to-regexp/-/path-to-regexp-1.7.0.tgz#f1af9d9c9db5f8ad80aa75ed424db665c48d6cd4"
+  integrity sha1-8a+dnJ21+K2AqnXtQk22ZcSNbNQ=
+  dependencies:
+    path-to-regexp "*"
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.7.3.tgz?cache=0&sync_timestamp=1588201821986&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fprop-types%2Fdownload%2F%40types%2Fprop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -7863,6 +7870,11 @@ path-parse@^1.0.6:
   resolved "https://registry.npm.taobao.org/path-parse/download/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
 
+path-to-regexp@*:
+  version "6.1.0"
+  resolved "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-6.1.0.tgz#0b18f88b7a0ce0bfae6a25990c909ab86f512427"
+  integrity sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw==
+
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
@@ -7872,11 +7884,6 @@ path-to-regexp@^3.1.0:
   version "3.2.0"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-3.2.0.tgz#fa7877ecbc495c601907562222453c43cc204a5f"
   integrity sha1-+nh37LxJXGAZB1YiIkU8Q8wgSl8=
-
-path-to-regexp@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-6.1.0.tgz#0b18f88b7a0ce0bfae6a25990c909ab86f512427"
-  integrity sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw==
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -10425,25 +10432,10 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-taro-ray@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/taro-ray/-/taro-ray-0.1.2.tgz#0b72431f03720a79cc2aae681df298f885b650d3"
-  integrity sha512-u6wrnTliFmUS3DQslrwrpgw8nJseQpB7xgIk3evyPuK56MotttY2SALpaC3YcFoX7CTeJUcqb9JOQyZ7qBIThQ==
-  dependencies:
-    "@babel/runtime" "^7.7.7"
-    "@tarojs/components" "3.0.2"
-    "@tarojs/react" "3.0.2"
-    "@tarojs/runtime" "3.0.2"
-    "@tarojs/taro" "3.0.2"
-    lodash "^4.17.15"
-    path-to-regexp "^6.1.0"
-    react "^16.10.0"
-    react-dom "^16.10.0"
-
-taro-ray@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmjs.org/taro-ray/-/taro-ray-0.4.0.tgz#b4552100a4385b5176f905c51ca04e98c6687c8a"
-  integrity sha512-Hvyabkv9KFAOU7eXo/L5vM6SGtVY9FBjm+FamQTS2Of4UsSEMME8qG4Fqa/rsFLehOPLdaQUrCJirycOly1wYg==
+taro-ray@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/taro-ray/-/taro-ray-1.0.6.tgz#3b9ec2fbfced9a97576ec7885d59dc0910909596"
+  integrity sha512-d1VgMAGfex2PEzoFPq7It2yzLtl3xx5KrqNNDd9F21NYm2vvJCWZ6xzPd89Xe27SadbPsg9tU2Uc0VXvb2x+XQ==
   dependencies:
     "@babel/runtime" "^7.7.7"
     "@tarojs/components" "3.0.2"
@@ -10452,22 +10444,6 @@ taro-ray@^0.4.0:
     "@tarojs/taro" "3.0.2"
     react "^16.10.0"
     react-dom "^16.10.0"
-    taro-ray "^0.1.2"
-
-taro-ray@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/taro-ray/-/taro-ray-1.0.2.tgz#053dfb3d2fc53158262a2cdda4d1cef0476ef60d"
-  integrity sha512-PXaht0UFZ8zkfPpwVXOMQHTJtTVWmrLofPc28oidS9Bx/IYRS+Pl5dgPzQf9DnQacfGwV0AlGqrFd6qd3iqVVg==
-  dependencies:
-    "@babel/runtime" "^7.7.7"
-    "@tarojs/components" "3.0.2"
-    "@tarojs/react" "3.0.2"
-    "@tarojs/runtime" "3.0.2"
-    "@tarojs/taro" "3.0.2"
-    path-to-regexp "^6.1.0"
-    react "^16.10.0"
-    react-dom "^16.10.0"
-    taro-ray "^0.4.0"
 
 terser-webpack-plugin@^1.4.3:
   version "1.4.4"
