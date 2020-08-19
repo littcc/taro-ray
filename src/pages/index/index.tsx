@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Taro, { Chain } from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
-import { TaroRay } from 'taro-ray';
+// import { TaroRay } from 'taro-ray';
 
 // TODO 测试
-// import { TaroRay } from '../../../lib';
+import { TaroRay } from '../../../lib';
 // import TaroRay from '../../service';
 
 const codeErrorBehavior = {
@@ -30,7 +30,7 @@ const httpCodeBehavior = {
   404: {
     message: '测试404',
     behavior: detail => {
-      console.log(detail, detail);
+      // console.log(detail, detail);
     },
   },
 };
@@ -50,10 +50,10 @@ const errorHandle = (chain: Chain) => {
   const { requestParams } = chain;
   return chain
     .proceed(requestParams)
-    .then(({ responseData }) => {
-      const { data, code } = responseData;
+    .then(r => {
+      const { data, code } = r.responseData;
       if (code !== '0000') {
-        return Promise.reject(responseData);
+        return Promise.reject(r.responseData);
       }
       return data;
     })
@@ -65,7 +65,7 @@ const errorHandle = (chain: Chain) => {
 const urls = {
   h5: '/api',
   weapp: 'http://${url}',
-  url: '/v2',
+  url: '',
 };
 
 const getUrlOfTaroEnv = () => {
@@ -85,7 +85,6 @@ const request = TaroRay.init({
       const { requestParams } = chain;
       return chain.proceed(requestParams).then(response => {
         // TODO 什么也不干 打印一下数据
-        console.log(response);
         return response;
       });
     },

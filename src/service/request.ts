@@ -34,11 +34,13 @@ const request: Request = {
         return response;
       })
       .catch(e => {
-        const { error } = e;
+        const { error = {}, message } = e;
+        let errorMessage = message || error.message;
+        const options = defaults({ title: errorMessage }, errorConfig);
         setTimeout(() => {
-          errorConfig.showToast && Taro.showToast(defaults({ title: error.message }, errorConfig));
+          errorConfig.showToast && Taro.showToast(options);
           if (errorConfig.redirectToErrorPage) {
-            Taro.redirectTo({ url: `${errorConfig.redirectToErrorPage}?msg=${error.message}` });
+            Taro.redirectTo({ url: `${errorConfig.redirectToErrorPage}?msg=${options.title}` });
           }
         }, 100);
         loadingConfig.showToast && Taro.hideToast();

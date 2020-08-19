@@ -96,6 +96,7 @@ const httpCodeHandle = (chain: Chain) => {
         responseData: data,
         error: null,
         response,
+        chain,
       });
     })
     .catch(error => {
