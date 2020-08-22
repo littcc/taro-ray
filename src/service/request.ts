@@ -36,7 +36,7 @@ const request: Request = {
       .catch(e => {
         const { error = {}, message } = e;
         let errorMessage = message || error.message;
-        const options = defaults({ title: errorMessage }, errorConfig);
+        const options = defaults(errorConfig, { title: errorMessage });
         setTimeout(() => {
           errorConfig.showToast && Taro.showToast(options);
           if (errorConfig.redirectToErrorPage) {
