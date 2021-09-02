@@ -5,7 +5,6 @@ import { View, Button } from '@tarojs/components';
 
 // TODO 测试
 import { TaroRay } from '../../../lib';
-// import TaroRay from '../../service';
 
 const codeErrorBehavior = {
   default: {
@@ -27,22 +26,22 @@ const codeErrorBehavior = {
 };
 
 const httpCodeBehavior = {
-  404: {
-    message: '测试404',
-    behavior: detail => {
-      // console.log(detail, detail);
-    },
-  },
+  // 404: {
+  //   message: '测试4011114',
+  //   behavior: detail => {
+  //     // console.log(detail, detail);
+  //   },
+  // },
 };
 
 const responseCodeErrorHandle = (chain: Chain) => {
   const { requestParams } = chain;
   return chain.proceed(requestParams).catch(error => {
     const { code } = error;
-    const { behavior } = codeErrorBehavior[code] || { behavior: null, message: '' };
+    const { behavior, message } = codeErrorBehavior[code] || { behavior: null, message: '' };
     behavior && behavior(error);
 
-    return Promise.reject(error);
+    return Promise.reject(message ? { message } : error);
   });
 };
 
@@ -104,17 +103,24 @@ export default class Index extends Component {
 
   onRequest1 = () => {
     request
-      .post({
-        url: '/api/grocery',
-        data: {
-          id: 111,
-          name: 222,
-          age: 333,
+      .get(
+        {
+          url: '/token/',
+          data: {
+            id: 111,
+            name: 222,
+            age: 333,
+          },
+          header: {
+            a: '1111',
+          },
         },
-        header: {
-          a: '1111',
-        },
-      })
+        {
+          // error: {
+          //   title: 'error',
+          // },
+        }
+      )
       .then(response => {
         console.log('页面返回数据', response);
       });

@@ -1,5 +1,5 @@
-import { TaroRay } from './service/request';
 import {
+  TaroRay,
   AnyObject,
   MessageConfig,
   Request,
@@ -7,7 +7,7 @@ import {
   HttpCodeBehavior,
   Interceptor,
   InitOption,
-} from './service/interface.d';
+} from './service/request';
 
 export { TaroRay, AnyObject, MessageConfig, Request, BehaviorData, HttpCodeBehavior, Interceptor, InitOption };
 
