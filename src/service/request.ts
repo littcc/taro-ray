@@ -43,23 +43,21 @@ export interface BehaviorData {
     | {
         [key: string]: string;
       }
-    | null;
-  response: {
-    header: {
-      [key: string]: string;
-    };
-    data: any;
-    statusCode: number;
-  };
-  responseData: any;
+    | null
+    | HttpCodeBehaviorDetail;
   isRequestError?: boolean;
+  chain: Chain;
+  httpCodeHandle: (chain: Chain) => Promise<any>;
+  detail?: HttpCodeBehaviorDetail;
 }
 
+export type HttpCodeBehaviorDetail = {
+  message?: string;
+  behavior?: (data: BehaviorData) => boolean | void;
+};
+
 export type HttpCodeBehavior = {
-  [key: string]: {
-    message: string;
-    behavior: (data: BehaviorData) => boolean | void;
-  };
+  [key: string]: HttpCodeBehaviorDetail;
 };
 
 export type Interceptor = (chain: Chain) => Promise<any>;
@@ -82,7 +80,7 @@ const LANGUAGES = new Map<Locale, Language>([
     'en',
     {
       loading: 'Loading...',
-      defaultError: 'failed, please try again later!',
+      defaultError: 'Failed, please try again later!',
     },
   ],
 ]);
@@ -95,6 +93,7 @@ export interface Ray {
     [key: string]: string | number;
   };
   init: (option: InitOption) => Request;
+  setLanguage: (locale: Locale) => void;
   locale?: Locale;
 }
 
@@ -119,48 +118,63 @@ const httpCodeHandle = (chain: Chain) => {
     .proceed(requestParams)
     .then(response => {
       const { data, statusCode } = response;
+
       if (statusCode !== STATUS_CODE.ok) {
         // 如果传入了自定义的默认错误消息, 将会走默认的错误消息提示
         const detail = defaultsDeep(
           {},
-          TaroRay.httpCodeBehavior[statusCode],
+          TaroRay!.httpCodeBehavior[statusCode],
           typeof data === 'string' ? { message: data } : data
-        );
+        ) as HttpCodeBehaviorDetail;
+
         const { behavior } = detail;
-        behavior && behavior(detail);
-        return Promise.reject({
-          error: detail,
-          response,
-          responseData: data,
+        const result = {
+          isRequestError: true,
+          error: response,
           chain,
-        });
+          detail,
+          message: detail.message || response.message,
+          httpCodeHandle,
+        };
+
+        behavior && behavior(result);
+        return Promise.reject(result);
       }
+
       return Promise.resolve({
         responseData: data,
-        error: null,
         response,
+        error: null,
         chain,
       });
     })
     .catch(error => {
-      const { status } = error;
+      const { status, data } = error;
 
-      if (status !== STATUS_CODE.ok) {
-        // 如果传入了自定义的默认错误消息, 将会走默认的错误消息提示
-        const detail = defaultsDeep({}, TaroRay.httpCodeBehavior[status]);
-        const { behavior } = detail;
-        behavior && behavior(detail);
-        return Promise.reject({
-          isRequestError: true,
-          error: detail,
-          chain,
-        });
-      }
-      return Promise.reject({
+      // 如果传入了自定义的默认错误消息, 将会走默认的错误消息提示
+      const detail = defaultsDeep(
+        {},
+        TaroRay!.httpCodeBehavior[status],
+        typeof data === 'string' ? { message: data } : data
+      ) as HttpCodeBehaviorDetail;
+      const { behavior } = detail;
+
+      const result = {
         isRequestError: true,
-        chain,
         error,
-      });
+        chain,
+        detail,
+        message: detail.message || error.message,
+        httpCodeHandle,
+      };
+
+      if (behavior) {
+        if (status !== STATUS_CODE.ok) {
+          return behavior(result);
+        }
+        behavior(result);
+      }
+      return Promise.reject(result);
     });
 };
 
@@ -237,6 +251,28 @@ export const TaroRay: Ray = {
   httpCodeBehavior: {},
   header: {},
   locale: 'zh-cn',
+  setLanguage(locale = 'zh-cn') {
+    this.locale = locale;
+    const language = LANGUAGES.get(locale) as Language;
+
+    DEFAULTERROR = language?.defaultError;
+    DEFAULT_MESSAGE_CONFIG = {
+      loading: {
+        title: language?.loading,
+        icon: 'loading',
+        duration: 60000,
+        mask: true,
+        showToast: true,
+      },
+      error: {
+        icon: 'none',
+        mask: true,
+        duration: 1500,
+        showToast: true,
+        redirectToErrorPage: '',
+      },
+    };
+  },
   init({ baseUrl = '', interceptors = [], httpCodeBehavior = {}, header = {}, locale = 'zh-cn' }) {
     this.baseUrl = baseUrl;
     this.interceptors = interceptors;

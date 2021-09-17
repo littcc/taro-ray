@@ -5187,10 +5187,10 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
-going-merry@^0.1.18:
-  version "0.1.18"
-  resolved "https://registry.npmjs.org/going-merry/-/going-merry-0.1.18.tgz#f48492b9df70e78ac5da8077c570eb4350385090"
-  integrity sha512-yqfkPuaDEFSGKUo8bi6vcYuOSowz0osJpuvEj+R4AOqowXh3Hu4Qd0713CM56U3dPzujmzrw+AkR5i8wM6BzWg==
+going-merry@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/going-merry/-/going-merry-0.2.0.tgz#14ee08950fffa279cf73e28b4e0c283f54899173"
+  integrity sha512-HBpoFpGFjKDdwE+jVbVyJxH2v/ujDrjm57DqDZwspGK3X4S5u1yOqvbHTihpMtOFoxqNYh8rZMwGIATAPKX24A==
 
 gonzales-pe@^4.2.3:
   version "4.3.0"
