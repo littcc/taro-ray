@@ -1,6 +1,6 @@
 {
   "name": "taro-ray",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "private": false,
   "license": "MIT",
   "description": "taro-ray是一款Taro.request封装过的请求库可在多平台使用weapp & h5",
@@ -34,15 +34,15 @@
   ],
   "author": "littcc",
   "dependencies": {
+    "going-merry": "0.2.0"
+  },
+  "devDependencies": {
     "@babel/runtime": "^7.7.7",
+    "@babel/core": "^7.8.0",
     "@tarojs/components": "3.0.2",
     "@tarojs/react": "3.0.2",
     "@tarojs/runtime": "3.0.2",
     "@tarojs/taro": "3.0.2",
-    "going-merry": "0.2.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.8.0",
     "@tarojs/mini-runner": "3.0.2",
     "@tarojs/webpack-runner": "3.0.2",
     "@types/path-to-regexp": "^1.7.0",
